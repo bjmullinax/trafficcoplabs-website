@@ -1,0 +1,2746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traffic Cop Labs - Home</title>
+
+
+<script>
+(function(){
+  var img = new Image();
+  img.src = 'https://crm.trafficcoplabs.com/api/track/pageview/?page=home.html&_t=' + Date.now();
+})();
+</script>
+</head>
+<body>
+
+<!-- ============================================================
+     TRAFFIC COP LABS — HOMEPAGE REDESIGN v3
+     Mission Over Margins - Product-Focused Layout
+     Order: Hero → Overview → Founder → Hardware → Software → Training → Footprint → Mission → Newsletter
+     ============================================================ -->
+
+<style>
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+</style>
+
+<tcl-homepage></tcl-homepage>
+
+<script>
+class TCLHomepage extends HTMLElement {
+  connectedCallback() {
+    const shadow = this.attachShadow({ mode: 'open' });
+
+    shadow.innerHTML = `
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+
+        *, *::before, *::after {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        :host {
+          display: block;
+          font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+          font-size: 16px;
+          line-height: 1.6;
+          color: #ffffff;
+          background: #0a0c10;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          overflow-x: hidden;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        img { display: block; max-width: 100%; }
+
+        :host {
+          --tcl-black:        #0a0c10;
+          --tcl-dark:         #0f1218;
+          --tcl-dark-mid:     #161a22;
+          --tcl-dark-light:   #1e232d;
+          --tcl-border:       rgba(255, 255, 255, 0.06);
+          --tcl-border-hover: rgba(255, 255, 255, 0.12);
+          --tcl-orange:       #F5A623;
+          --tcl-orange-dark:  #d99520;
+          --tcl-orange-dim:   rgba(245, 166, 35, 0.15);
+          --tcl-orange-glow:  rgba(245, 166, 35, 0.3);
+          --tcl-blue:         #6B8EFF;
+          --tcl-blue-dim:     rgba(107, 142, 255, 0.15);
+          --tcl-cyan:         #00D4FF;
+          --tcl-cyan-dim:     rgba(0, 212, 255, 0.15);
+          --tcl-green:        #10b981;
+          --tcl-green-dim:    rgba(16, 185, 129, 0.15);
+          --tcl-purple:       #A855F7;
+          --tcl-purple-dim:   rgba(168, 85, 247, 0.15);
+          --tcl-white:        #ffffff;
+          --tcl-cream:        #F2F2F2;
+          --tcl-text:         rgba(255, 255, 255, 0.9);
+          --tcl-text-mid:     rgba(255, 255, 255, 0.6);
+          --tcl-text-muted:   rgba(255, 255, 255, 0.4);
+          --tcl-max-w:        1280px;
+          --ease-out:         cubic-bezier(0.16, 1, 0.3, 1);
+          --ease:             cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ============================================================
+           HERO
+           ============================================================ */
+        .hero {
+          position: relative;
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+        }
+
+        .hero__bg {
+          position: absolute;
+          inset: 0;
+          background: url('https://trafficcoplabs.com/wp-content/uploads/2025/06/traffic-cop-labs-graffiti-crash.jpg') center center / cover no-repeat fixed;
+        }
+
+        .hero__overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            180deg,
+            rgba(10, 12, 16, 0.88) 0%,
+            rgba(10, 12, 16, 0.75) 50%,
+            rgba(10, 12, 16, 0.95) 100%
+          );
+        }
+
+        .hero__grid {
+          position: absolute;
+          inset: 0;
+          background-image: 
+            linear-gradient(rgba(245,166,35,0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(245,166,35,0.03) 1px, transparent 1px);
+          background-size: 60px 60px;
+          mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black 20%, transparent 70%);
+          -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black 20%, transparent 70%);
+        }
+
+        .hero__glow {
+          position: absolute;
+          top: -20%;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 140%;
+          height: 70%;
+          background: radial-gradient(ellipse at center, var(--tcl-orange-dim) 0%, transparent 60%);
+          pointer-events: none;
+        }
+
+        .hero__content {
+          position: relative;
+          z-index: 2;
+          max-width: 900px;
+          margin: 0 auto;
+          padding: 140px 32px 100px;
+          text-align: center;
+        }
+
+        .hero__badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          padding: 10px 20px;
+          background: var(--tcl-orange-dim);
+          border: 1px solid rgba(245, 166, 35, 0.35);
+          border-radius: 100px;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          color: var(--tcl-orange);
+          margin-bottom: 32px;
+          animation: fadeSlideUp 0.8s var(--ease-out) both;
+        }
+
+        .hero__badge-icon {
+          width: 16px;
+          height: 16px;
+        }
+
+        .hero__headline {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(4rem, 12vw, 8rem);
+          font-weight: 400;
+          line-height: 0.9;
+          letter-spacing: 0.02em;
+          color: var(--tcl-white);
+          margin-bottom: 28px;
+          animation: fadeSlideUp 0.8s var(--ease-out) 0.1s both;
+        }
+
+        .hero__headline-accent {
+          color: var(--tcl-orange);
+          display: block;
+        }
+
+        .hero__desc {
+          font-size: 19px;
+          font-weight: 400;
+          line-height: 1.7;
+          color: var(--tcl-text-mid);
+          max-width: 650px;
+          margin: 0 auto 40px;
+          animation: fadeSlideUp 0.8s var(--ease-out) 0.2s both;
+        }
+
+        .hero__ctas {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 16px;
+          animation: fadeSlideUp 0.8s var(--ease-out) 0.3s both;
+        }
+
+        .btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          padding: 14px 28px;
+          font-size: 13px;
+          font-weight: 700;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.25s var(--ease-out);
+          border: 2px solid transparent;
+        }
+
+        .btn--primary {
+          background: var(--tcl-orange);
+          color: var(--tcl-black);
+          border-color: var(--tcl-orange);
+        }
+
+        .btn--primary:hover {
+          background: #ffb940;
+          border-color: #ffb940;
+          transform: translateY(-3px);
+          box-shadow: 0 12px 32px var(--tcl-orange-glow);
+        }
+
+        .btn--ghost {
+          background: transparent;
+          color: var(--tcl-white);
+          border-color: var(--tcl-border-hover);
+        }
+
+        .btn--ghost:hover {
+          background: rgba(255, 255, 255, 0.05);
+          border-color: var(--tcl-white);
+        }
+
+        .btn__icon {
+          width: 16px;
+          height: 16px;
+        }
+
+        .hero__scroll {
+          position: absolute;
+          bottom: 40px;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 3;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+          color: var(--tcl-text-muted);
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          animation: fadeSlideUp 0.8s var(--ease-out) 0.5s both;
+        }
+
+        .hero__scroll-line {
+          width: 1px;
+          height: 40px;
+          background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 100%);
+        }
+
+        @keyframes fadeSlideUp {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============================================================
+           SECTION COMMON STYLES
+           ============================================================ */
+        .section {
+          padding: 100px 32px;
+        }
+
+        .section--dark {
+          background: var(--tcl-dark);
+          border-top: 1px solid var(--tcl-border);
+        }
+
+        .section--darker {
+          background: var(--tcl-black);
+        }
+
+        .section__inner {
+          max-width: var(--tcl-max-w);
+          margin: 0 auto;
+        }
+
+        .section-header {
+          text-align: center;
+          margin-bottom: 56px;
+        }
+
+        .section-eyebrow {
+          display: inline-block;
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 3px;
+          text-transform: uppercase;
+          color: var(--tcl-orange);
+          margin-bottom: 12px;
+        }
+
+        .section-title {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(2rem, 5vw, 3rem);
+          font-weight: 400;
+          line-height: 1.05;
+          letter-spacing: 0.02em;
+          color: var(--tcl-white);
+        }
+
+        .section-title span {
+          color: var(--tcl-orange);
+        }
+
+        .section-subtitle {
+          font-size: 16px;
+          color: var(--tcl-text-mid);
+          max-width: 600px;
+          margin: 16px auto 0;
+          line-height: 1.6;
+        }
+
+        /* ============================================================
+           OVERVIEW SECTION (WHAT WE DO)
+           ============================================================ */
+        .overview {
+          padding: 100px 32px;
+          background: var(--tcl-dark);
+          border-top: 1px solid var(--tcl-border);
+        }
+
+        .overview__inner {
+          max-width: var(--tcl-max-w);
+          margin: 0 auto;
+        }
+
+        .overview__grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+        }
+
+        .overview-card {
+          position: relative;
+          background: var(--tcl-dark-mid);
+          border: 1px solid var(--tcl-border);
+          border-radius: 16px;
+          overflow: hidden;
+          transition: all 0.35s var(--ease-out);
+          cursor: pointer;
+        }
+
+        .overview-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 3px;
+          background: var(--card-accent, var(--tcl-orange));
+          opacity: 0;
+          transition: opacity 0.25s;
+          z-index: 2;
+        }
+
+        .overview-card:hover {
+          border-color: var(--tcl-border-hover);
+          transform: translateY(-6px);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .overview-card:hover::before {
+          opacity: 1;
+        }
+
+        .overview-card--hardware { --card-accent: var(--tcl-blue); }
+        .overview-card--software { --card-accent: var(--tcl-cyan); }
+        .overview-card--training { --card-accent: var(--tcl-green); }
+
+        .overview-card__image {
+          position: relative;
+          height: 300px;
+          overflow: hidden;
+        }
+
+        .overview-card__image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s var(--ease-out);
+        }
+
+        .overview-card:hover .overview-card__image img {
+          transform: scale(1.05);
+        }
+
+        .overview-card__image-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(180deg, transparent 80%, rgba(10, 12, 16, 0.95) 100%);
+        }
+
+        .overview-card__content {
+          padding: 16px 20px 20px;
+          text-align: center;
+        }
+
+        .overview-card__icon {
+          width: 52px;
+          height: 52px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: linear-gradient(135deg, var(--card-accent), color-mix(in srgb, var(--card-accent) 60%, black));
+          border-radius: 12px;
+          margin: -42px auto 14px;
+          position: relative;
+          z-index: 1;
+          color: var(--tcl-white);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .overview-card__icon svg {
+          width: 24px;
+          height: 24px;
+        }
+
+        .overview-card__title {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 1.4rem;
+          letter-spacing: 0.03em;
+          color: var(--tcl-white);
+          margin-bottom: 8px;
+        }
+
+        .overview-card__desc {
+          font-size: 13px;
+          color: var(--tcl-text-mid);
+          line-height: 1.5;
+          margin-bottom: 12px;
+        }
+
+        .overview-card__link {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          color: var(--card-accent);
+          transition: gap 0.2s var(--ease-out);
+        }
+
+        .overview-card:hover .overview-card__link {
+          gap: 12px;
+        }
+
+        .overview-card__link svg {
+          width: 16px;
+          height: 16px;
+        }
+
+        /* ============================================================
+           FOUNDER SECTION
+           ============================================================ */
+        .founder {
+          padding: 100px 32px;
+          background: var(--tcl-black);
+          border-top: 1px solid var(--tcl-border);
+        }
+
+        .founder__inner {
+          max-width: var(--tcl-max-w);
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: 1fr 1.2fr;
+          gap: 64px;
+          align-items: center;
+        }
+
+        .founder__image-wrap {
+          position: relative;
+          border-radius: 20px;
+          overflow: hidden;
+          border: 1px solid var(--tcl-border);
+        }
+
+        .founder__image {
+          width: 100%;
+          height: auto;
+        }
+
+        .founder__image-caption {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: 16px 20px;
+          background: linear-gradient(180deg, transparent, rgba(10, 12, 16, 0.95));
+          font-size: 12px;
+          font-weight: 500;
+          color: var(--tcl-text-mid);
+        }
+
+        .founder__content {
+          max-width: 540px;
+        }
+
+        .founder__eyebrow {
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 2.5px;
+          text-transform: uppercase;
+          color: var(--tcl-orange);
+          margin-bottom: 16px;
+        }
+
+        .founder__title {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(2.2rem, 4.5vw, 3rem);
+          font-weight: 400;
+          line-height: 1.05;
+          letter-spacing: 0.02em;
+          color: var(--tcl-white);
+          margin-bottom: 24px;
+        }
+
+        .founder__title span {
+          color: var(--tcl-orange);
+        }
+
+        .founder__text {
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 1.8;
+          color: var(--tcl-text-mid);
+          margin-bottom: 16px;
+        }
+
+        .founder__text strong {
+          color: var(--tcl-white);
+          font-weight: 600;
+        }
+
+        .founder__highlight {
+          margin-top: 28px;
+          padding: 24px;
+          background: var(--tcl-dark);
+          border: 1px solid var(--tcl-border);
+          border-left: 3px solid var(--tcl-orange);
+          border-radius: 0 12px 12px 0;
+        }
+
+        .founder__highlight-text {
+          font-size: 15px;
+          font-weight: 500;
+          font-style: italic;
+          color: var(--tcl-text);
+          line-height: 1.7;
+        }
+
+        /* ============================================================
+           HARDWARE SPOTLIGHT
+           ============================================================ */
+        .hardware {
+          background: var(--tcl-dark);
+          padding: 100px 32px;
+          border-top: 1px solid var(--tcl-border);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .hardware::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: 
+            radial-gradient(ellipse at 20% 30%, var(--tcl-blue-dim) 0%, transparent 50%),
+            radial-gradient(ellipse at 80% 80%, var(--tcl-purple-dim) 0%, transparent 40%);
+          pointer-events: none;
+        }
+
+        .hardware__inner {
+          position: relative;
+          z-index: 1;
+          max-width: var(--tcl-max-w);
+          margin: 0 auto;
+        }
+
+        .hardware__grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 32px;
+          margin-top: 56px;
+        }
+
+        .hardware-card {
+          position: relative;
+          background: var(--tcl-dark-mid);
+          border: 1px solid var(--tcl-border);
+          border-radius: 20px;
+          overflow: hidden;
+          transition: all 0.35s var(--ease-out);
+        }
+
+        .hardware-card:hover {
+          border-color: var(--tcl-border-hover);
+          transform: translateY(-6px);
+          box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .hardware-card--featured {
+          grid-column: 1 / -1;
+          display: grid;
+          grid-template-columns: 1.1fr 1fr;
+          gap: 0;
+        }
+
+        .hardware-card--featured:hover {
+          border-color: rgba(107, 142, 255, 0.4);
+        }
+
+        .hardware-card__image {
+          position: relative;
+          background: linear-gradient(135deg, #0d1220 0%, #0a0c10 100%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 48px;
+          min-height: 320px;
+        }
+
+        .hardware-card__image img {
+          max-width: 100%;
+          max-height: 280px;
+          object-fit: contain;
+          filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+          transition: transform 0.5s var(--ease-out);
+        }
+
+        .hardware-card:hover .hardware-card__image img {
+          transform: scale(1.05);
+        }
+
+        .hardware-card__badge {
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          padding: 8px 16px;
+          background: var(--tcl-blue-dim);
+          border: 1px solid var(--tcl-blue);
+          border-radius: 100px;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 1.5px;
+          text-transform: uppercase;
+          color: var(--tcl-blue);
+        }
+
+        .hardware-card__content {
+          padding: 40px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        .hardware-card__eyebrow {
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          color: var(--tcl-blue);
+          margin-bottom: 12px;
+        }
+
+        .hardware-card__title {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(2rem, 4vw, 2.8rem);
+          letter-spacing: 0.02em;
+          color: var(--tcl-white);
+          margin-bottom: 16px;
+          line-height: 1;
+        }
+
+        .hardware-card__desc {
+          font-size: 15px;
+          color: var(--tcl-text-mid);
+          line-height: 1.7;
+          margin-bottom: 24px;
+        }
+
+        .hardware-card__specs {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 12px;
+          margin-bottom: 28px;
+        }
+
+        .hardware-card__spec {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 10px 16px;
+          background: var(--tcl-dark);
+          border: 1px solid var(--tcl-border);
+          border-radius: 8px;
+          font-size: 13px;
+          color: var(--tcl-text);
+        }
+
+        .hardware-card__spec svg {
+          width: 16px;
+          height: 16px;
+          color: var(--tcl-blue);
+        }
+
+        .hardware-card__price {
+          display: flex;
+          align-items: baseline;
+          gap: 12px;
+          margin-bottom: 24px;
+        }
+
+        .hardware-card__price-amount {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 2.5rem;
+          color: var(--tcl-white);
+          letter-spacing: 0.02em;
+        }
+
+        .hardware-card__price-note {
+          font-size: 13px;
+          color: var(--tcl-text-muted);
+        }
+
+        .hardware-card__cta {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          padding: 14px 28px;
+          background: var(--tcl-blue);
+          border-radius: 10px;
+          font-size: 13px;
+          font-weight: 700;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          color: var(--tcl-white);
+          transition: all 0.25s var(--ease-out);
+          width: fit-content;
+        }
+
+        .hardware-card__cta:hover {
+          background: #8aa8ff;
+          transform: translateY(-3px);
+          box-shadow: 0 12px 32px rgba(107, 142, 255, 0.35);
+        }
+
+        .hardware-card__cta svg {
+          width: 16px;
+          height: 16px;
+        }
+
+        /* SG6 Secondary Card */
+        .hardware-card--secondary .hardware-card__image {
+          min-height: 240px;
+          padding: 32px;
+        }
+
+        .hardware-card--secondary .hardware-card__content {
+          padding: 28px;
+        }
+
+        .hardware-card--secondary .hardware-card__title {
+          font-size: 1.8rem;
+        }
+
+        .hardware-card--secondary .hardware-card__badge {
+          background: var(--tcl-purple-dim);
+          border-color: var(--tcl-purple);
+          color: var(--tcl-purple);
+        }
+
+        .hardware-card--secondary .hardware-card__eyebrow {
+          color: var(--tcl-purple);
+        }
+
+        .hardware-card--secondary .hardware-card__spec svg {
+          color: var(--tcl-purple);
+        }
+
+        .hardware-card--secondary .hardware-card__cta {
+          background: var(--tcl-purple);
+        }
+
+        .hardware-card--secondary .hardware-card__cta:hover {
+          background: #bb7af7;
+          box-shadow: 0 12px 32px rgba(168, 85, 247, 0.35);
+        }
+
+        .hardware-card--secondary:hover {
+          border-color: rgba(168, 85, 247, 0.4);
+        }
+
+        /* Host a Class Card */
+        .hardware-card--host {
+          background: linear-gradient(135deg, var(--tcl-dark-mid) 0%, var(--tcl-dark) 100%);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          padding: 48px 32px;
+          min-height: 400px;
+        }
+
+        .hardware-card--host .hardware-card__icon {
+          width: 72px;
+          height: 72px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: var(--tcl-orange-dim);
+          border-radius: 20px;
+          margin-bottom: 24px;
+          color: var(--tcl-orange);
+        }
+
+        .hardware-card--host .hardware-card__icon svg {
+          width: 36px;
+          height: 36px;
+        }
+
+        .hardware-card--host .hardware-card__title {
+          font-size: 2rem;
+          margin-bottom: 12px;
+        }
+
+        .hardware-card--host .hardware-card__desc {
+          max-width: 300px;
+          margin-bottom: 28px;
+        }
+
+        .hardware-card--host .hardware-card__cta {
+          background: var(--tcl-orange);
+          color: var(--tcl-black);
+        }
+
+        .hardware-card--host .hardware-card__cta:hover {
+          background: #ffb940;
+          box-shadow: 0 12px 32px var(--tcl-orange-glow);
+        }
+
+        .hardware-card--host:hover {
+          border-color: rgba(245, 166, 35, 0.4);
+        }
+
+        /* ============================================================
+           SOFTWARE SPOTLIGHT
+           ============================================================ */
+        .software {
+          background: var(--tcl-black);
+          border-top: 1px solid var(--tcl-border);
+          padding: 100px 32px;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .software::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: 
+            radial-gradient(ellipse at 70% 20%, var(--tcl-cyan-dim) 0%, transparent 50%),
+            radial-gradient(ellipse at 20% 80%, var(--tcl-blue-dim) 0%, transparent 40%);
+          pointer-events: none;
+        }
+
+        .software__inner {
+          position: relative;
+          z-index: 1;
+          max-width: var(--tcl-max-w);
+          margin: 0 auto;
+        }
+
+        .software__featured {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 48px;
+          align-items: center;
+          margin-bottom: 56px;
+          padding: 48px;
+          background: var(--tcl-dark-mid);
+          border: 1px solid var(--tcl-border);
+          border-radius: 24px;
+          transition: all 0.35s var(--ease-out);
+        }
+
+        .software__featured:hover {
+          border-color: rgba(0, 212, 255, 0.4);
+          box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .software__featured-image {
+          position: relative;
+          border-radius: 16px;
+          overflow: hidden;
+          border: 1px solid var(--tcl-border);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .software__featured-image img {
+          width: 100%;
+          height: auto;
+        }
+
+        .software__featured-badge {
+          position: absolute;
+          top: 16px;
+          left: 16px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 16px;
+          background: rgba(0, 212, 255, 0.2);
+          border: 1px solid var(--tcl-cyan);
+          border-radius: 100px;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 1.5px;
+          text-transform: uppercase;
+          color: var(--tcl-cyan);
+        }
+
+        .software__featured-badge-dot {
+          width: 8px;
+          height: 8px;
+          background: var(--tcl-cyan);
+          border-radius: 50%;
+          animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.4; }
+        }
+
+        .software__featured-content {
+          padding: 16px 0;
+        }
+
+        .software__featured-eyebrow {
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          color: var(--tcl-cyan);
+          margin-bottom: 16px;
+        }
+
+        .software__featured-title {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(2.5rem, 5vw, 3.5rem);
+          letter-spacing: 0.02em;
+          color: var(--tcl-white);
+          margin-bottom: 16px;
+          line-height: 0.95;
+          background: linear-gradient(135deg, var(--tcl-white) 0%, var(--tcl-cyan) 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .software__featured-tagline {
+          font-size: 17px;
+          font-weight: 500;
+          font-style: italic;
+          color: var(--tcl-cyan);
+          margin-bottom: 16px;
+        }
+
+        .software__featured-desc {
+          font-size: 15px;
+          color: var(--tcl-text-mid);
+          line-height: 1.7;
+          margin-bottom: 24px;
+        }
+
+        .software__featured-highlights {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 12px;
+          margin-bottom: 28px;
+        }
+
+        .software__featured-highlight {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 10px 16px;
+          background: var(--tcl-dark);
+          border: 1px solid var(--tcl-border);
+          border-radius: 8px;
+          font-size: 13px;
+          color: var(--tcl-text);
+        }
+
+        .software__featured-highlight svg {
+          width: 16px;
+          height: 16px;
+          color: var(--tcl-cyan);
+        }
+
+        .software__featured-pricing {
+          display: flex;
+          align-items: center;
+          gap: 24px;
+          margin-bottom: 28px;
+          padding: 20px 24px;
+          background: var(--tcl-dark);
+          border: 1px solid var(--tcl-border);
+          border-radius: 12px;
+        }
+
+        .software__featured-price {
+          text-align: center;
+        }
+
+        .software__featured-price-label {
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          color: var(--tcl-text-muted);
+          margin-bottom: 4px;
+        }
+
+        .software__featured-price-amount {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 1.5rem;
+          color: var(--tcl-white);
+          letter-spacing: 0.02em;
+        }
+
+        .software__featured-price-period {
+          font-size: 12px;
+          color: var(--tcl-text-muted);
+        }
+
+        .software__featured-cta {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          padding: 14px 28px;
+          background: var(--tcl-cyan);
+          border-radius: 10px;
+          font-size: 13px;
+          font-weight: 700;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          color: var(--tcl-black);
+          transition: all 0.25s var(--ease-out);
+        }
+
+        .software__featured-cta:hover {
+          background: #33e0ff;
+          transform: translateY(-3px);
+          box-shadow: 0 12px 32px rgba(0, 212, 255, 0.35);
+        }
+
+        .software__featured-cta svg {
+          width: 16px;
+          height: 16px;
+        }
+
+        /* Other Software Grid */
+        .software__grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+        }
+
+        .software-card {
+          background: var(--tcl-dark-mid);
+          border: 1px solid var(--tcl-border);
+          border-radius: 16px;
+          padding: 28px;
+          transition: all 0.35s var(--ease-out);
+        }
+
+        .software-card:hover {
+          border-color: var(--tcl-border-hover);
+          transform: translateY(-4px);
+        }
+
+        .software-card__icon {
+          width: 56px;
+          height: 56px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: var(--tcl-blue-dim);
+          border-radius: 14px;
+          margin-bottom: 20px;
+        }
+
+        .software-card__icon svg {
+          width: 28px;
+          height: 28px;
+          color: var(--tcl-blue);
+        }
+
+        .software-card__title {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 1.4rem;
+          letter-spacing: 0.02em;
+          color: var(--tcl-white);
+          margin-bottom: 8px;
+        }
+
+        .software-card__desc {
+          font-size: 14px;
+          color: var(--tcl-text-mid);
+          line-height: 1.6;
+          margin-bottom: 16px;
+        }
+
+        .software-card__price {
+          font-size: 13px;
+          font-weight: 600;
+          color: var(--tcl-green);
+          margin-bottom: 16px;
+        }
+
+        .software-card__link {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          color: var(--tcl-blue);
+          transition: gap 0.2s var(--ease-out);
+        }
+
+        .software-card__link:hover {
+          gap: 10px;
+        }
+
+        .software-card__link svg {
+          width: 14px;
+          height: 14px;
+        }
+
+        .software-card--free .software-card__icon {
+          background: var(--tcl-green-dim);
+        }
+
+        .software-card--free .software-card__icon svg {
+          color: var(--tcl-green);
+        }
+
+        .software-card--free .software-card__link {
+          color: var(--tcl-green);
+        }
+
+        /* ============================================================
+           TRAINING CAROUSEL
+           ============================================================ */
+        .training {
+          padding: 100px 0;
+          background: var(--tcl-dark);
+          border-top: 1px solid var(--tcl-border);
+          overflow: hidden;
+        }
+
+        .training__header {
+          max-width: var(--tcl-max-w);
+          margin: 0 auto 48px;
+          padding: 0 32px;
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          flex-wrap: wrap;
+          gap: 24px;
+        }
+
+        .training__header-left {
+          max-width: 500px;
+        }
+
+        .training__header-right {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+
+        .training__link {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 14px;
+          font-weight: 600;
+          color: var(--tcl-orange);
+          transition: gap 0.2s var(--ease-out);
+        }
+
+        .training__link:hover {
+          gap: 12px;
+        }
+
+        .training__link svg {
+          width: 18px;
+          height: 18px;
+        }
+
+        .carousel-nav {
+          display: flex;
+          gap: 8px;
+        }
+
+        .carousel-nav__btn {
+          width: 44px;
+          height: 44px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: var(--tcl-dark-mid);
+          border: 1px solid var(--tcl-border);
+          border-radius: 10px;
+          color: var(--tcl-text-mid);
+          cursor: pointer;
+          transition: all 0.25s var(--ease-out);
+        }
+
+        .carousel-nav__btn:hover {
+          background: var(--tcl-orange);
+          border-color: var(--tcl-orange);
+          color: var(--tcl-black);
+          transform: scale(1.05);
+        }
+
+        .carousel-nav__btn:active {
+          transform: scale(0.95);
+        }
+
+        .carousel-nav__btn svg {
+          width: 20px;
+          height: 20px;
+        }
+
+        .carousel-wrap {
+          position: relative;
+          max-width: var(--tcl-max-w);
+          margin: 0 auto;
+          padding: 0 32px;
+        }
+
+        .carousel {
+          display: flex;
+          gap: 20px;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          -webkit-overflow-scrolling: touch;
+          scroll-behavior: smooth;
+          padding-bottom: 8px;
+        }
+
+        .carousel::-webkit-scrollbar {
+          display: none;
+        }
+
+        .course-card {
+          flex: 0 0 280px;
+          scroll-snap-align: start;
+          background: var(--tcl-dark-mid);
+          border: 1px solid var(--tcl-border);
+          border-radius: 14px;
+          overflow: hidden;
+          transition: all 0.35s var(--ease-out);
+        }
+
+        .course-card:hover {
+          border-color: rgba(245, 166, 35, 0.3);
+          transform: translateY(-4px);
+          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .course-card__image {
+          position: relative;
+          height: 140px;
+          overflow: hidden;
+        }
+
+        .course-card__image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s var(--ease-out);
+        }
+
+        .course-card:hover .course-card__image img {
+          transform: scale(1.05);
+        }
+
+        .course-card__image-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(180deg, transparent 40%, rgba(10, 12, 16, 0.9) 100%);
+        }
+
+        .course-card__badges {
+          position: absolute;
+          top: 12px;
+          left: 12px;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+        }
+
+        .course-card__badge {
+          padding: 5px 10px;
+          background: rgba(10, 12, 16, 0.85);
+          backdrop-filter: blur(8px);
+          border-radius: 5px;
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+        }
+
+        .course-card__badge--online {
+          color: var(--tcl-green);
+          border: 1px solid rgba(16, 185, 129, 0.4);
+        }
+
+        .course-card__badge--inperson {
+          color: var(--tcl-orange);
+          border: 1px solid rgba(245, 166, 35, 0.4);
+        }
+
+        .course-card__badge--virtual {
+          color: var(--tcl-cyan);
+          border: 1px solid rgba(0, 212, 255, 0.4);
+        }
+
+        .course-card__content {
+          padding: 18px;
+        }
+
+        .course-card__title {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 1.25rem;
+          letter-spacing: 0.02em;
+          color: var(--tcl-white);
+          margin-bottom: 6px;
+          line-height: 1.1;
+        }
+
+        .course-card__desc {
+          font-size: 13px;
+          color: var(--tcl-text-mid);
+          line-height: 1.5;
+          margin-bottom: 12px;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        .course-card__meta {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 12px;
+          padding-top: 12px;
+          border-top: 1px solid var(--tcl-border);
+        }
+
+        .course-card__meta-item {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          font-size: 11px;
+          color: var(--tcl-text-muted);
+        }
+
+        .course-card__meta-item svg {
+          width: 12px;
+          height: 12px;
+          color: var(--tcl-orange);
+        }
+
+        .course-card__cta {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 14px;
+          padding-top: 12px;
+          border-top: 1px solid var(--tcl-border);
+        }
+
+        .course-card__price {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 1.15rem;
+          color: var(--tcl-orange);
+          letter-spacing: 0.02em;
+        }
+
+        .course-card__link {
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          color: var(--tcl-orange);
+          transition: gap 0.2s var(--ease-out);
+        }
+
+        .course-card__link:hover {
+          gap: 8px;
+        }
+
+        .course-card__link svg {
+          width: 12px;
+          height: 12px;
+        }
+
+        /* ============================================================
+           FOOTPRINT SECTION
+           ============================================================ */
+        .footprint {
+          padding: 100px 32px;
+          background: var(--tcl-black);
+          border-top: 1px solid var(--tcl-border);
+        }
+
+        .footprint__inner {
+          max-width: var(--tcl-max-w);
+          margin: 0 auto;
+        }
+
+        .footprint__grid {
+          display: grid;
+          grid-template-columns: 1.4fr 1fr;
+          gap: 56px;
+          align-items: center;
+        }
+
+        .footprint__map-wrap {
+          position: relative;
+        }
+
+        .footprint__map {
+          width: 100%;
+          height: auto;
+          border-radius: 16px;
+          border: 1px solid var(--tcl-border);
+        }
+
+        .footprint__map-caption {
+          margin-top: 12px;
+          font-size: 12px;
+          color: var(--tcl-text-muted);
+          text-align: center;
+        }
+
+        .footprint__content {
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+        }
+
+        .footprint__text {
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 1.8;
+          color: var(--tcl-text-mid);
+        }
+
+        .footprint__text strong {
+          color: var(--tcl-white);
+          font-weight: 600;
+        }
+
+        .footprint__stats {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 16px;
+        }
+
+        .footprint__stat {
+          padding: 24px;
+          background: var(--tcl-dark);
+          border: 1px solid var(--tcl-border);
+          border-radius: 12px;
+          text-align: center;
+        }
+
+        .footprint__stat-value {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 2.5rem;
+          color: var(--tcl-orange);
+          letter-spacing: 0.02em;
+          line-height: 1;
+          margin-bottom: 8px;
+        }
+
+        .footprint__stat-label {
+          font-size: 12px;
+          font-weight: 600;
+          letter-spacing: 0.5px;
+          color: var(--tcl-text-muted);
+        }
+
+        .footprint__global {
+          padding: 20px 24px;
+          background: var(--tcl-orange-dim);
+          border: 1px solid rgba(245, 166, 35, 0.25);
+          border-radius: 12px;
+        }
+
+        .footprint__global-title {
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 1.5px;
+          text-transform: uppercase;
+          color: var(--tcl-orange);
+          margin-bottom: 8px;
+        }
+
+        .footprint__global-text {
+          font-size: 14px;
+          color: var(--tcl-text-mid);
+          line-height: 1.6;
+        }
+
+        /* ============================================================
+           MISSION SECTION
+           ============================================================ */
+        .mission {
+          padding: 100px 32px;
+          background: var(--tcl-dark);
+          border-top: 1px solid var(--tcl-border);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .mission::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 100%;
+          height: 100%;
+          background: radial-gradient(ellipse at center, var(--tcl-orange-dim) 0%, transparent 50%);
+          pointer-events: none;
+        }
+
+        .mission__inner {
+          position: relative;
+          z-index: 1;
+          max-width: 800px;
+          margin: 0 auto;
+          text-align: center;
+        }
+
+        .mission__icon {
+          width: 72px;
+          height: 72px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: linear-gradient(135deg, var(--tcl-orange), var(--tcl-orange-dark));
+          border-radius: 20px;
+          margin: 0 auto 32px;
+          color: var(--tcl-white);
+          box-shadow: 0 12px 40px var(--tcl-orange-glow);
+        }
+
+        .mission__icon svg {
+          width: 36px;
+          height: 36px;
+        }
+
+        .mission__title {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(2.5rem, 6vw, 3.5rem);
+          font-weight: 400;
+          line-height: 1.05;
+          letter-spacing: 0.02em;
+          color: var(--tcl-white);
+          margin-bottom: 24px;
+        }
+
+        .mission__title span {
+          color: var(--tcl-orange);
+        }
+
+        .mission__text {
+          font-size: 17px;
+          font-weight: 400;
+          line-height: 1.9;
+          color: var(--tcl-text-mid);
+        }
+
+        .mission__text strong {
+          color: var(--tcl-white);
+          font-weight: 600;
+        }
+
+        /* ============================================================
+           NEWSLETTER SECTION
+           ============================================================ */
+        .newsletter {
+          padding: 80px 32px;
+          background: var(--tcl-black);
+          border-top: 1px solid var(--tcl-border);
+        }
+
+        .newsletter__inner {
+          max-width: 700px;
+          margin: 0 auto;
+          text-align: center;
+        }
+
+        .newsletter__title {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: clamp(1.8rem, 4vw, 2.4rem);
+          font-weight: 400;
+          line-height: 1.1;
+          letter-spacing: 0.02em;
+          color: var(--tcl-white);
+          margin-bottom: 12px;
+        }
+
+        .newsletter__desc {
+          font-size: 15px;
+          color: var(--tcl-text-mid);
+          margin-bottom: 32px;
+          line-height: 1.6;
+        }
+
+        .newsletter__form {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 16px;
+        }
+
+        .newsletter__field {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          text-align: left;
+        }
+
+        .newsletter__field--full {
+          grid-column: 1 / -1;
+        }
+
+        .newsletter__label {
+          font-size: 12px;
+          font-weight: 600;
+          letter-spacing: 0.5px;
+          color: var(--tcl-text-mid);
+        }
+
+        .newsletter__input,
+        .newsletter__select {
+          padding: 14px 16px;
+          background: var(--tcl-dark);
+          border: 1px solid var(--tcl-border);
+          border-radius: 10px;
+          font-family: 'Outfit', sans-serif;
+          font-size: 14px;
+          color: var(--tcl-white);
+          transition: border-color 0.2s;
+        }
+
+        .newsletter__input::placeholder {
+          color: var(--tcl-text-muted);
+        }
+
+        .newsletter__input:focus,
+        .newsletter__select:focus {
+          outline: none;
+          border-color: var(--tcl-orange);
+        }
+
+        .newsletter__select {
+          cursor: pointer;
+          appearance: none;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath d='M3 4.5L6 7.5L9 4.5'/%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: right 16px center;
+          padding-right: 40px;
+        }
+
+        .newsletter__select option {
+          background: var(--tcl-dark);
+          color: var(--tcl-white);
+        }
+
+        .newsletter__submit {
+          grid-column: 1 / -1;
+          margin-top: 8px;
+          padding: 16px 32px;
+          background: var(--tcl-orange);
+          border: none;
+          border-radius: 10px;
+          font-family: 'Outfit', sans-serif;
+          font-size: 14px;
+          font-weight: 700;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          color: var(--tcl-black);
+          cursor: pointer;
+          transition: all 0.25s var(--ease-out);
+        }
+
+        .newsletter__submit:hover {
+          background: #ffb940;
+          transform: translateY(-3px);
+          box-shadow: 0 12px 32px var(--tcl-orange-glow);
+        }
+
+        .newsletter__note {
+          margin-top: 20px;
+          font-size: 12px;
+          color: var(--tcl-text-muted);
+        }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 1024px) {
+          .overview__grid {
+            grid-template-columns: 1fr;
+            max-width: 400px;
+            margin: 0 auto;
+          }
+
+          .overview-card__image {
+            height: 180px;
+          }
+
+          .overview-card__icon {
+            margin-top: -38px;
+          }
+
+          .founder__inner {
+            grid-template-columns: 1fr;
+            gap: 48px;
+          }
+
+          .founder__content {
+            max-width: 100%;
+            order: 2;
+          }
+
+          .founder__image-wrap {
+            order: 1;
+            max-width: 500px;
+            margin: 0 auto;
+          }
+
+          .hardware__grid {
+            grid-template-columns: 1fr;
+          }
+
+          .hardware-card--featured {
+            grid-template-columns: 1fr;
+          }
+
+          .hardware-card--featured .hardware-card__image {
+            min-height: 280px;
+          }
+
+          .software__featured {
+            grid-template-columns: 1fr;
+            gap: 32px;
+          }
+
+          .software__grid {
+            grid-template-columns: 1fr 1fr;
+          }
+
+          .footprint__grid {
+            grid-template-columns: 1fr;
+            gap: 40px;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .section {
+            padding: 72px 24px;
+          }
+
+          .overview {
+            padding: 72px 24px;
+          }
+
+          .founder {
+            padding: 72px 24px;
+          }
+
+          .training {
+            padding: 72px 0;
+          }
+
+          .training__header {
+            padding: 0 24px;
+            flex-direction: column;
+            align-items: flex-start;
+          }
+
+          .training__header-right {
+            width: 100%;
+            justify-content: space-between;
+          }
+
+          .carousel-wrap {
+            padding: 0 24px;
+          }
+
+          .course-card {
+            flex: 0 0 260px;
+          }
+
+          .software__grid {
+            grid-template-columns: 1fr;
+          }
+
+          .software__featured {
+            padding: 32px;
+          }
+
+          .software__featured-pricing {
+            flex-wrap: wrap;
+            gap: 16px;
+          }
+
+          .footprint__stats {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .hero__content {
+            padding: 120px 24px 80px;
+          }
+
+          .hero__ctas {
+            flex-direction: column;
+            align-items: center;
+          }
+
+          .btn {
+            width: 100%;
+            max-width: 280px;
+            justify-content: center;
+          }
+
+          .hero__scroll {
+            display: none;
+          }
+
+          .hardware-card__content {
+            padding: 28px;
+          }
+
+          .hardware-card__specs {
+            flex-direction: column;
+          }
+
+          .newsletter__form {
+            grid-template-columns: 1fr;
+          }
+        }
+      </style>
+
+      <!-- ============================================================
+           HERO
+           ============================================================ -->
+      <section class="hero">
+        <div class="hero__bg"></div>
+        <div class="hero__overlay"></div>
+        <div class="hero__grid"></div>
+        <div class="hero__glow"></div>
+
+        <div class="hero__content">
+          <div class="hero__badge">
+            <svg class="hero__badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            100% Law Enforcement Owned
+          </div>
+
+          <h1 class="hero__headline">
+            MISSION OVER
+            <span class="hero__headline-accent">MARGINS</span>
+          </h1>
+
+          <p class="hero__desc">
+            Training, hardware, and software built (or handpicked) by a cop — for cops. Every dollar we save you goes back where it belongs: more training, more vests, more tourniquets.
+          </p>
+
+          <div class="hero__ctas">
+            <a href="https://trafficcoplabs.com/calendar" class="btn btn--primary">
+              <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              View Training
+            </a>
+            <a href="#hardware" class="btn btn--ghost js-scroll-link">
+              Explore Products
+            </a>
+          </div>
+        </div>
+
+        <div class="hero__scroll">
+          <span>Scroll</span>
+          <div class="hero__scroll-line"></div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           WHAT WE DO - OVERVIEW
+           ============================================================ -->
+      <section class="overview">
+        <div class="overview__inner">
+          <div class="section-header">
+            <p class="section-eyebrow">What We Do</p>
+            <h2 class="section-title">FROM THE SCENE <span>TO THE STAND</span></h2>
+            <p class="section-subtitle">We equip public safety professionals at every stage — from working the field to presenting in the courtroom.</p>
+          </div>
+
+          <div class="overview__grid">
+            <div class="overview-card overview-card--hardware js-scroll-link" data-target="hardware">
+              <div class="overview-card__image">
+                <img src="https://trafficcoplabs.com/wp-content/uploads/2026/02/gnss-mapping.jpg" alt="GNSS Mapping Hardware" loading="lazy" style="object-position: center 20%;">
+                <div class="overview-card__image-overlay"></div>
+              </div>
+              <div class="overview-card__content">
+                <div class="overview-card__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+                  </svg>
+                </div>
+                <h3 class="overview-card__title">HARDWARE</h3>
+                <p class="overview-card__desc">Future proof your mapping workflow with options that are either designed and assembled in the USA or made in Singapore.</p>
+                <span class="overview-card__link">
+                  Explore Hardware
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </span>
+              </div>
+            </div>
+
+            <div class="overview-card overview-card--software js-scroll-link" data-target="software">
+              <div class="overview-card__image">
+                <img src="https://trafficcoplabs.com/wp-content/uploads/2026/02/crash_markup.png" alt="Crash Reconstruction Software" loading="lazy">
+                <div class="overview-card__image-overlay"></div>
+              </div>
+              <div class="overview-card__content">
+                <div class="overview-card__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="16 18 22 12 16 6"/>
+                    <polyline points="8 6 2 12 8 18"/>
+                  </svg>
+                </div>
+                <h3 class="overview-card__title">SOFTWARE</h3>
+                <p class="overview-card__desc">Video analysis, photogrammetry, and crash reconstruction tools. Courtroom-ready output.</p>
+                <span class="overview-card__link">
+                  View Software
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </span>
+              </div>
+            </div>
+
+            <div class="overview-card overview-card--training js-scroll-link" data-target="training">
+              <div class="overview-card__image">
+                <img src="https://trafficcoplabs.com/wp-content/uploads/2026/02/drone-training.jpg" alt="Crash Investigation Training" loading="lazy">
+                <div class="overview-card__image-overlay"></div>
+              </div>
+              <div class="overview-card__content">
+                <div class="overview-card__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                    <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                  </svg>
+                </div>
+                <h3 class="overview-card__title">TRAINING</h3>
+                <p class="overview-card__desc">Online courses and in-person instruction. Designed by investigators, for investigators.</p>
+                <span class="overview-card__link">
+                  Browse Courses
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           FOUNDER STORY (THE TCL DIFFERENCE)
+           ============================================================ -->
+      <section class="founder" id="founder">
+        <div class="founder__inner">
+          <div class="founder__image-wrap">
+            <img src="https://trafficcoplabs.com/wp-content/uploads/2025/06/crash-scene-mapping.png" alt="Traffic Cop Labs founder mapping a crash scene" class="founder__image" loading="lazy">
+            <div class="founder__image-caption">Working the scene of a crash with the Spartanburg Police Department</div>
+          </div>
+
+          <div class="founder__content">
+            <p class="founder__eyebrow">The TCL Difference</p>
+            <h2 class="founder__title">
+              BUILT BY A COP.<br>
+              <span>NOT A CORPORATION.</span>
+            </h2>
+
+            <p class="founder__text">
+              While other companies hire law enforcement to sell their products, <strong>Traffic Cop Labs is 100% former LE-owned</strong>. I've worked the crashes, mapped the scenes, and testified in court.
+            </p>
+
+            <p class="founder__text">
+              I built the hardware. I coded the software. Or I selectively hand picked solutions that solve real problems for public safety. And I created the training — because I understand what you actually need in the field, not what looks good in a sales pitch.
+            </p>
+
+            <div class="founder__highlight">
+              <p class="founder__highlight-text">
+                "Every dollar we save you is a dollar that goes back into your agency — more training, more ballistic vests, more tourniquets. That's what Mission Over Margins means."
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           HARDWARE SPOTLIGHT
+           ============================================================ -->
+      <section class="hardware" id="hardware">
+        <div class="hardware__inner">
+          <div class="section-header">
+            <p class="section-eyebrow">Hardware</p>
+            <h2 class="section-title">SURVEY-GRADE <span>EQUIPMENT</span></h2>
+            <p class="section-subtitle">GNSS mapping systems that deliver professional results at fair prices. With the Fusion Rover by Traffic Cop Labs to the GEOMATE receivers sourced through iGage, we've got a mapping solution for every budget and every department.</p>
+          </div>
+
+          <div class="hardware__grid">
+            <!-- SG6 - Featured -->
+            <article class="hardware-card hardware-card--featured">
+              <div class="hardware-card__image">
+                <span class="hardware-card__badge">Visual Evidence Relocate & 3D Modeling</span>
+                <img src="https://trafficcoplabs.com/wp-content/uploads/2026/02/sg6-front.png" alt="GeoMate SG6 Dual Camera GNSS" loading="lazy">
+              </div>
+              <div class="hardware-card__content">
+                <p class="hardware-card__eyebrow">GeoMate SG6</p>
+                <h3 class="hardware-card__title">DUAL-CAMERA GNSS RECEIVER</h3>
+                <p class="hardware-card__desc">
+                  Survey-grade dual-camera GNSS receiver. Precisely relocate evidence visually with the bottom camera days, months, or even years later. Capture georeferenced video and images through the front camera for visual evidence marking or 3D modeling. Open RTK network and perpetual mapping software.
+                </p>
+                <div class="hardware-card__specs">
+                  <div class="hardware-card__spec">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                    Dual Cameras
+                  </div>
+                  <div class="hardware-card__spec">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                    RTK Ready
+                  </div>
+                  <div class="hardware-card__spec">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                    3D Modeling
+                  </div>
+                </div>
+                <a href="https://trafficcoplabs.com/sg6" class="hardware-card__cta">
+                  Explore SG6
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </article>
+
+            <!-- Fusion Rover - Secondary -->
+            <article class="hardware-card hardware-card--secondary">
+              <div class="hardware-card__image">
+                <span class="hardware-card__badge">BUILT BY TRAFFIC COP LABS</span>
+                <img src="https://trafficcoplabs.com/wp-content/uploads/2025/12/IMG_6746-scaled.jpg" alt="TCL Fusion Rover GNSS System" loading="lazy">
+              </div>
+              <div class="hardware-card__content">
+                <p class="hardware-card__eyebrow" style="color: var(--tcl-purple);">TCL Fusion Rover</p>
+                <h3 class="hardware-card__title">CRASH SCENE MAPPING — SIMPLIFIED</h3>
+                <p class="hardware-card__desc">
+                  Survey-grade GNSS mapping built by a cop, for cops. 2-3cm RTK accuracy using free state networks. No base stations, no complicated setup.
+                </p>
+                <div class="hardware-card__specs">
+                  <div class="hardware-card__spec">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                    2-3cm RTK
+                  </div>
+                  <div class="hardware-card__spec">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    Made in USA
+                  </div>
+                </div>
+                <div class="hardware-card__price">
+                  <span class="hardware-card__price-amount">$2,497</span>
+                  <span class="hardware-card__price-note">Early Adopter</span>
+                </div>
+                <a href="https://trafficcoplabs.com/fusion" class="hardware-card__cta">
+                  View Fusion Rover
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </article>
+
+            <!-- Host a Class CTA -->
+            <article class="hardware-card hardware-card--host">
+              <div class="hardware-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <h3 class="hardware-card__title">HOST A CLASS</h3>
+              <p class="hardware-card__desc">
+                Bring expert training to your agency. Custom scheduling, team discounts, and earn free seats.
+              </p>
+              <a href="https://trafficcoplabs.com/host-a-class" class="hardware-card__cta">
+                Learn More
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           SOFTWARE SPOTLIGHT
+           ============================================================ -->
+      <section class="software" id="software">
+        <div class="software__inner">
+          <div class="section-header">
+            <p class="section-eyebrow">Software</p>
+            <h2 class="section-title">TOOLS THAT <span>WORK</span></h2>
+            <p class="section-subtitle">Specialized software for video analysis, photogrammetry, and crash reconstruction calculations.</p>
+          </div>
+
+          <!-- ChronoSnap Featured -->
+          <div class="software__featured">
+            <div class="software__featured-image">
+              <span class="software__featured-badge">
+                <span class="software__featured-badge-dot"></span>
+                Built For Crash Reconstruction
+              </span>
+              <img src="https://trafficcoplabs.com/wp-content/uploads/2025/06/Chronosnap-landing-page-top-photo.png" alt="ChronoSnap Video Analysis Interface" loading="lazy">
+            </div>
+            <div class="software__featured-content">
+              <p class="software__featured-eyebrow">ChronoSnap</p>
+              <h3 class="software__featured-title">VIDEO ANALYSIS SOFTWARE</h3>
+              <p class="software__featured-tagline">"Frame-by-frame truth extraction"</p>
+              <p class="software__featured-desc">
+                Turn surveillance, dash cam, and body cam footage into courtroom-ready speed calculations and event timelines. Built-in formulas, automated frame extraction, and professional PDF reports.
+              </p>
+              <div class="software__featured-highlights">
+                <div class="software__featured-highlight">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                  Speed Calculations
+                </div>
+                <div class="software__featured-highlight">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                  Frame Analysis
+                </div>
+                <div class="software__featured-highlight">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                  Court-Ready Reports
+                </div>
+              </div>
+              <div class="software__featured-pricing">
+                <div class="software__featured-price">
+                  <div class="software__featured-price-label">Monthly</div>
+                  <div class="software__featured-price-amount">$79</div>
+                  <div class="software__featured-price-period">/mo</div>
+                </div>
+                <div class="software__featured-price">
+                  <div class="software__featured-price-label">Annual</div>
+                  <div class="software__featured-price-amount">$697</div>
+                  <div class="software__featured-price-period">/yr</div>
+                </div>
+                <div class="software__featured-price">
+                  <div class="software__featured-price-label">Perpetual</div>
+                  <div class="software__featured-price-amount">$1,497</div>
+                  <div class="software__featured-price-period">one-time</div>
+                </div>
+              </div>
+              <a href="https://trafficcoplabs.com/chronosnap" class="software__featured-cta">
+                Explore ChronoSnap
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Other Software Grid -->
+          <div class="software__grid">
+            <!-- PedStrikePRO -->
+            <article class="software-card">
+              <div class="software-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="5" r="3"/>
+                  <line x1="12" y1="8" x2="12" y2="16"/>
+                  <line x1="8" y1="12" x2="16" y2="12"/>
+                  <line x1="12" y1="16" x2="8" y2="22"/>
+                  <line x1="12" y1="16" x2="16" y2="22"/>
+                </svg>
+              </div>
+              <h3 class="software-card__title">PEDSTRIKEPRO</h3>
+              <p class="software-card__desc">Pedestrian impact calculations and throw distance analysis for ped-vehicle collisions.</p>
+              <p class="software-card__price">Perpetual License</p>
+              <a href="https://trafficcoplabs.com/pedstrikepro" class="software-card__link">
+                Learn More
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </article>
+
+            <!-- PhotoModeler -->
+            <article class="software-card">
+              <div class="software-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <polyline points="21 15 16 10 5 21"/>
+                </svg>
+              </div>
+              <h3 class="software-card__title">PHOTOMODELER</h3>
+              <p class="software-card__desc">Professional photogrammetry software for 3D measurements from photos. Authorized reseller.</p>
+              <p class="software-card__price">Contact for Pricing</p>
+              <a href="https://trafficcoplabs.com/photomodeler" class="software-card__link">
+                Learn More
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </article>
+
+            <!-- VINSights -->
+            <article class="software-card software-card--free">
+              <div class="software-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"/>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+              </div>
+              <h3 class="software-card__title">VINSIGHTS</h3>
+              <p class="software-card__desc">Free VIN decoder for crash investigators. Get vehicle specs, safety features, and recall information instantly.</p>
+              <p class="software-card__price">Free Tool</p>
+              <a href="https://trafficcoplabs.com/vinsights" class="software-card__link">
+                Try It Free
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           TRAINING CAROUSEL
+           ============================================================ -->
+      <section class="training" id="training">
+        <div class="training__header">
+          <div class="training__header-left">
+            <p class="section-eyebrow">Training</p>
+            <h2 class="section-title">LEVEL UP YOUR <span>SKILLS</span></h2>
+            <p class="section-subtitle">Online courses, in-person classes, and host-a-class programs designed by investigators, for investigators.</p>
+          </div>
+          <div class="training__header-right">
+            <div class="carousel-nav">
+              <button class="carousel-nav__btn carousel-nav__btn--prev" aria-label="Previous courses">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <button class="carousel-nav__btn carousel-nav__btn--next" aria-label="Next courses">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </div>
+            <a href="https://trafficcoplabs.com/calendar" class="training__link">
+              View Calendar
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="carousel-wrap">
+          <div class="carousel">
+          <!-- Ready 107 -->
+          <article class="course-card">
+            <div class="course-card__image">
+              <img src="https://trafficcoplabs.com/wp-content/uploads/2024/01/aircraft-drone-phantom-4-1846656.jpg" alt="Ready 107 FAA Part 107 Course" loading="lazy">
+              <div class="course-card__image-overlay"></div>
+              <div class="course-card__badges">
+                <span class="course-card__badge course-card__badge--online">Online</span>
+                <span class="course-card__badge course-card__badge--virtual">Virtual</span>
+                <span class="course-card__badge course-card__badge--inperson">In-Person</span>
+              </div>
+            </div>
+            <div class="course-card__content">
+              <h3 class="course-card__title">READY 107</h3>
+              <p class="course-card__desc">FAA Part 107 test prep designed for public safety professionals. Pass your exam on the first try.</p>
+              <div class="course-card__meta">
+                <div class="course-card__meta-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  Self-Paced
+                </div>
+                <div class="course-card__meta-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                  8+ Hours
+                </div>
+              </div>
+              <div class="course-card__cta">
+                <span class="course-card__price">$147</span>
+                <a href="https://trafficcoplabs.com/ready-107" class="course-card__link">
+                  Learn More
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Crash Evaluation -->
+          <article class="course-card">
+            <div class="course-card__image">
+              <img src="https://trafficcoplabs.com/wp-content/uploads/2026/02/crash-eval-hero-image.png" alt="Crash Evaluation Course" loading="lazy">
+              <div class="course-card__image-overlay"></div>
+              <div class="course-card__badges">
+                <span class="course-card__badge course-card__badge--online">Online</span>
+                <span class="course-card__badge course-card__badge--inperson">In-Person</span>
+                <span class="course-card__badge course-card__badge--virtual">Virtual</span>
+              </div>
+            </div>
+            <div class="course-card__content">
+              <h3 class="course-card__title">CRASH EVALUATION</h3>
+              <p class="course-card__desc">Foundational crash reconstruction covering vehicle dynamics, evidence documentation, and scene analysis.</p>
+              <div class="course-card__meta">
+                <div class="course-card__meta-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  40 Hours
+                </div>
+              </div>
+              <div class="course-card__cta">
+                <span class="course-card__price">$597</span>
+                <a href="https://trafficcoplabs.com/crash-eval" class="course-card__link">
+                  Learn More
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- FODM -->
+          <article class="course-card">
+            <div class="course-card__image">
+              <img src="https://trafficcoplabs.com/wp-content/uploads/2025/06/fundamentals-of-drone-mapping-course-banner.jpg" alt="Fundamentals of Drone Mapping" loading="lazy">
+              <div class="course-card__image-overlay"></div>
+              <div class="course-card__badges">
+                <span class="course-card__badge course-card__badge--inperson">In-Person</span>
+              </div>
+            </div>
+            <div class="course-card__content">
+              <h3 class="course-card__title">FUNDAMENTALS OF DRONE MAPPING</h3>
+              <p class="course-card__desc">Hands-on drone mapping: mission planning, GCPs, photogrammetry, and deliverable creation.</p>
+              <div class="course-card__meta">
+                <div class="course-card__meta-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  4 Days
+                </div>
+              </div>
+              <div class="course-card__cta">
+                <span class="course-card__price">$597</span>
+                <a href="https://trafficcoplabs.com/fodm" class="course-card__link">
+                  Learn More
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Auto 101 -->
+          <article class="course-card">
+            <div class="course-card__image">
+              <img src="https://trafficcoplabs.com/wp-content/uploads/2025/06/auto-101-course-banner.jpg" alt="Auto 101 Course" loading="lazy">
+              <div class="course-card__image-overlay"></div>
+              <div class="course-card__badges">
+                <span class="course-card__badge course-card__badge--online">Online</span>
+                <span class="course-card__badge course-card__badge--virtual">Virtual</span>
+                <span class="course-card__badge course-card__badge--inperson">In-Person</span>
+              </div>
+            </div>
+            <div class="course-card__content">
+              <h3 class="course-card__title">AUTO 101</h3>
+              <p class="course-card__desc">Automotive systems fundamentals for crash investigators. Understand components relevant to reconstruction.</p>
+              <div class="course-card__meta">
+                <div class="course-card__meta-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  Self-Paced
+                </div>
+                <div class="course-card__meta-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                  16 Hours
+                </div>
+              </div>
+              <div class="course-card__cta">
+                <span class="course-card__price">$297</span>
+                <a href="https://trafficcoplabs.com/auto-101" class="course-card__link">
+                  Learn More
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Ped-Bike -->
+          <article class="course-card">
+            <div class="course-card__image">
+              <img src="https://trafficcoplabs.com/wp-content/uploads/2025/06/ped-bike-crash-analysis-course-banner.jpg" alt="Pedestrian and Bicycle Crash Investigation" loading="lazy">
+              <div class="course-card__image-overlay"></div>
+              <div class="course-card__badges">
+                <span class="course-card__badge course-card__badge--online">Online</span>
+                <span class="course-card__badge course-card__badge--virtual">Virtual</span>
+                <span class="course-card__badge course-card__badge--inperson">In-Person</span>
+              </div>
+            </div>
+            <div class="course-card__content">
+              <h3 class="course-card__title">PED-BIKE CRASH INVESTIGATION</h3>
+              <p class="course-card__desc">Specialized course covering pedestrian and bicycle collision investigation, biomechanics, and throw calculations.</p>
+              <div class="course-card__meta">
+                <div class="course-card__meta-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  5 Days
+                </div>
+              </div>
+              <div class="course-card__cta">
+                <span class="course-card__price">$597</span>
+                <a href="https://trafficcoplabs.com/ped-bike" class="course-card__link">
+                  Learn More
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Weaponized Vehicle -->
+          <article class="course-card">
+            <div class="course-card__image">
+              <img src="https://trafficcoplabs.com/wp-content/uploads/2026/02/weaponized-vehicle-hero-image.png" alt="Weaponized Vehicle Attacks" loading="lazy">
+              <div class="course-card__image-overlay"></div>
+              <div class="course-card__badges">
+                <span class="course-card__badge course-card__badge--inperson">In-Person</span>
+              </div>
+            </div>
+            <div class="course-card__content">
+              <h3 class="course-card__title">WEAPONIZED VEHICLE ATTACKS</h3>
+              <p class="course-card__desc">Investigation of intentional vehicle-based attacks. Scene processing, evidence collection, and threat assessment.</p>
+              <div class="course-card__meta">
+                <div class="course-card__meta-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  3 Days
+                </div>
+              </div>
+              <div class="course-card__cta">
+                <span class="course-card__price">$397</span>
+                <a href="https://trafficcoplabs.com/weaponized-vehicle" class="course-card__link">
+                  Learn More
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Occupant Kinematics for LE -->
+          <article class="course-card">
+            <div class="course-card__image">
+              <img src="https://trafficcoplabs.com/wp-content/uploads/2025/06/occupant-kinematics-for-le-course-banner.jpg" alt="Occupant Kinematics for Law Enforcement" loading="lazy">
+              <div class="course-card__image-overlay"></div>
+              <div class="course-card__badges">
+                <span class="course-card__badge course-card__badge--online">Online</span>
+                <span class="course-card__badge course-card__badge--virtual">Virtual</span>
+                <span class="course-card__badge course-card__badge--inperson">In-Person</span>
+              </div>
+            </div>
+            <div class="course-card__content">
+              <h3 class="course-card__title">OCCUPANT KINEMATICS FOR LE</h3>
+              <p class="course-card__desc">Use physics, Newton's Laws of Motion, injury analysis, and anatomy to solve the classic "Who was Driving?" case.</p>
+              <div class="course-card__meta">
+                <div class="course-card__meta-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  5 Days
+                </div>
+              </div>
+              <div class="course-card__cta">
+                <span class="course-card__price">$597</span>
+                <a href="https://trafficcoplabs.com/okle" class="course-card__link">
+                  Learn More
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           NATIONAL FOOTPRINT
+           ============================================================ -->
+      <section class="footprint">
+        <div class="footprint__inner">
+          <div class="section-header">
+            <p class="section-eyebrow">Our Reach</p>
+            <h2 class="section-title">TRUSTED ACROSS <span>THE NATION</span></h2>
+          </div>
+
+          <div class="footprint__grid">
+            <div class="footprint__map-wrap">
+              <img src="https://trafficcoplabs.com/wp-content/uploads/2024/05/pushpin-map-updated.png" alt="In-person training locations across the United States" class="footprint__map" loading="lazy">
+              <p class="footprint__map-caption">Pushpins represent in-person training locations</p>
+            </div>
+
+            <div class="footprint__content">
+              <p class="footprint__text">
+                From <strong>law enforcement agencies</strong> and <strong>fire services</strong> to <strong>emergency management</strong>, <strong>state surveying societies</strong>, and <strong>national engineering organizations</strong> — we've earned trust across the public safety and professional communities.
+              </p>
+
+              <div class="footprint__stats">
+                <div class="footprint__stat">
+                  <div class="footprint__stat-value">11</div>
+                  <div class="footprint__stat-label">States (In-Person)</div>
+                </div>
+                <div class="footprint__stat">
+                  <div class="footprint__stat-value">3</div>
+                  <div class="footprint__stat-label">Industry Verticals</div>
+                </div>
+              </div>
+
+              <div class="footprint__global">
+                <p class="footprint__global-title">International Reach</p>
+                <p class="footprint__global-text">Online students from the United States, Canada, South Africa, and Australia.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           MISSION STATEMENT
+           ============================================================ -->
+      <section class="mission">
+        <div class="mission__inner">
+          <div class="mission__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+
+          <h2 class="mission__title">
+            YOUR MISSION.<br>
+            <span>OUR PRIORITY.</span>
+          </h2>
+
+          <p class="mission__text">
+            Traffic Cop Labs exists because public safety professionals deserve better — <strong>better training that's actually relevant, better equipment at fair prices, and better support from someone who's walked in your boots</strong>. We see your mission, not a price tag.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           NEWSLETTER
+           ============================================================ -->
+      <section class="newsletter">
+        <div class="newsletter__inner">
+          <h2 class="newsletter__title">STAY IN THE LOOP</h2>
+          <p class="newsletter__desc">
+            Get updates on new training courses, product releases, and industry insights. No spam — just useful stuff for investigators.
+          </p>
+
+          <form class="newsletter__form" action="https://formspree.io/f/xkovwgza" method="POST">
+            <div class="newsletter__field">
+              <label class="newsletter__label" for="nl-first">First Name</label>
+              <input type="text" id="nl-first" name="first_name" class="newsletter__input" placeholder="John" required>
+            </div>
+
+            <div class="newsletter__field">
+              <label class="newsletter__label" for="nl-last">Last Name</label>
+              <input type="text" id="nl-last" name="last_name" class="newsletter__input" placeholder="Smith" required>
+            </div>
+
+            <div class="newsletter__field">
+              <label class="newsletter__label" for="nl-email">Email Address</label>
+              <input type="email" id="nl-email" name="email" class="newsletter__input" placeholder="john.smith@agency.gov" required>
+            </div>
+
+            <div class="newsletter__field">
+              <label class="newsletter__label" for="nl-agency">Agency / Organization</label>
+              <input type="text" id="nl-agency" name="agency" class="newsletter__input" placeholder="Your department or company">
+            </div>
+
+            <div class="newsletter__field newsletter__field--full">
+              <label class="newsletter__label" for="nl-role">Your Role</label>
+              <select id="nl-role" name="role" class="newsletter__select">
+                <option value="">Select your role...</option>
+                <option value="Law Enforcement">Law Enforcement</option>
+                <option value="Fire / EMS">Fire / EMS</option>
+                <option value="Emergency Management">Emergency Management</option>
+                <option value="Private Investigator">Private Investigator / Consultant</option>
+                <option value="Engineer">Engineer</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <button type="submit" class="newsletter__submit">Join the Mission</button>
+          </form>
+
+          <p class="newsletter__note">We respect your inbox. Unsubscribe anytime.</p>
+        </div>
+      </section>
+    `;
+
+    // ============================================================
+    // JAVASCRIPT: Shadow DOM Scroll Handler
+    // ============================================================
+    const scrollLinks = shadow.querySelectorAll('.js-scroll-link');
+    
+    scrollLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Get target from data-target attribute or href
+        let targetId = link.dataset.target || link.getAttribute('href');
+        if (targetId && targetId.startsWith('#')) {
+          targetId = targetId.substring(1);
+        }
+        
+        if (targetId) {
+          const targetElement = shadow.getElementById(targetId);
+          if (targetElement) {
+            // Get the position relative to the document
+            const hostRect = this.getBoundingClientRect();
+            const targetRect = targetElement.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const targetPosition = targetRect.top + scrollTop - 80; // 80px offset for nav
+            
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+
+    // Also handle any anchor links with href="#..."
+    const anchorLinks = shadow.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach(link => {
+      if (!link.classList.contains('js-scroll-link')) {
+        link.addEventListener('click', (e) => {
+          const targetId = link.getAttribute('href').substring(1);
+          if (targetId) {
+            const targetElement = shadow.getElementById(targetId);
+            if (targetElement) {
+              e.preventDefault();
+              const targetRect = targetElement.getBoundingClientRect();
+              const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+              const targetPosition = targetRect.top + scrollTop - 80;
+              
+              window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+              });
+            }
+          }
+        });
+      }
+    });
+
+    // ============================================================
+    // CAROUSEL NAVIGATION
+    // ============================================================
+    const carousel = shadow.querySelector('.carousel');
+    const prevBtn = shadow.querySelector('.carousel-nav__btn--prev');
+    const nextBtn = shadow.querySelector('.carousel-nav__btn--next');
+    
+    if (carousel && prevBtn && nextBtn) {
+      const cardWidth = 300; // card width + gap
+      
+      prevBtn.addEventListener('click', () => {
+        carousel.scrollBy({
+          left: -cardWidth,
+          behavior: 'smooth'
+        });
+      });
+      
+      nextBtn.addEventListener('click', () => {
+        carousel.scrollBy({
+          left: cardWidth,
+          behavior: 'smooth'
+        });
+      });
+    }
+  }
+}
+
+customElements.define('tcl-homepage', TCLHomepage);
+</script>
+
+</body>
+</html>
