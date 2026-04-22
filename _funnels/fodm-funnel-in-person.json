@@ -7,7 +7,7 @@
       "id": "step_2b4fbc49",
       "name": "FRAME In Person",
       "path_suffix": "",
-      "type": "card",
+      "type": "full",
       "order": 0,
       "body_html": "",
       "card": {
@@ -30,5 +30,5 @@
     }
   ],
   "created_at": "2026-04-22T11:48:03.378732+00:00",
-  "updated_at": "2026-04-22T11:48:44.107235+00:00"
+  "updated_at": "2026-04-22T11:48:51.969949+00:00"
 }
