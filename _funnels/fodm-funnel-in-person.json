@@ -2,7 +2,33 @@
   "title": "FODM funnel In Person",
   "slug": "fodm-funnel-in-person",
   "root_path": "fodm-inperson/index.html",
-  "steps": [],
+  "steps": [
+    {
+      "id": "step_2b4fbc49",
+      "name": "FRAME In Person",
+      "path_suffix": "",
+      "type": "full",
+      "order": 0,
+      "body_html": "",
+      "card": {
+        "badge_text": "",
+        "headline": "",
+        "subheadline": "",
+        "description": "",
+        "bullets": [],
+        "price": "",
+        "original_price": "",
+        "image_url": ""
+      },
+      "cta_checkout_label": "Yes! Add This To My Order",
+      "cta_checkout_url": "",
+      "cta_interest_label": "Secure this offer for 90 days — I'll confirm later",
+      "cta_decline_label": "No thanks, I'll pass",
+      "next_on_accept": null,
+      "next_on_decline": null,
+      "is_published": false
+    }
+  ],
   "created_at": "2026-04-22T11:48:03.378732+00:00",
-  "updated_at": "2026-04-22T11:48:03.378732+00:00"
+  "updated_at": "2026-04-22T11:48:23.605665+00:00"
 }
