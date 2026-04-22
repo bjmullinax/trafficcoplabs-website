@@ -26,9 +26,9 @@
       "cta_decline_label": "No thanks, I'll pass",
       "next_on_accept": null,
       "next_on_decline": null,
-      "is_published": false
+      "is_published": true
     }
   ],
   "created_at": "2026-04-22T00:06:25.887350+00:00",
-  "updated_at": "2026-04-22T00:07:47.666327+00:00"
+  "updated_at": "2026-04-22T00:08:07.109598+00:00"
 }
